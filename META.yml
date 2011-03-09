@@ -1,0 +1,42 @@
+---
+abstract: 'Tapper - Testplan support'
+author:
+  - 'AMD OSRC Tapper Team, C<< <tapper at amd64.org> >>'
+  - 'AMD OSRC Tapper Team <tapper@amd64.org>'
+build_requires:
+  ExtUtils::MakeMaker: 6.42
+  Test::Differences: 0
+  Test::More: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 1.00'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Tapper-Testplan
+no_index:
+  directory:
+    - inc
+    - t
+requires:
+  CHI: 0
+  DateTime: 0
+  DateTime::Format::DateParse: 0
+  DateTime::Format::Natural: 0.91
+  DateTime::Format::Strptime: 0
+  Email::Sender::Simple: 0
+  Email::Sender::Transport::SMTP: 0
+  Email::Simple: 0
+  File::ShareDir: 0
+  File::Slurp: 0
+  Moose: 0
+  Tapper::Config: 3.000002
+  Tapper::Model: 3.000002
+  Template: 0
+  Text::CSV::Slurp: 0
+  WWW::Mechanize: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 3.000002
