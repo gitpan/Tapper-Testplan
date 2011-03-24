@@ -10,11 +10,13 @@ license  'perl';
 
 build_requires 'Test::More';
 build_requires 'Test::Differences';
+build_requires 'Test::MockModule';
 
 author_requires 'Module::Install::WriteAll';
 
 requires 'Moose' => 0;
 
+requires 'Tapper::Cmd'                    => "3.000004";
 requires 'Tapper::Config'                 => "3.000002";
 requires 'Tapper::Model'                  => "3.000002";
 requires 'CHI'                            => 0;

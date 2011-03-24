@@ -1,4 +1,3 @@
-.gitignore
 bin/tapper-testplan-generator
 bin/tapper-testplan-reporter
 ChangeLog
