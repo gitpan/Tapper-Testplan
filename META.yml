@@ -1,17 +1,18 @@
 ---
 abstract: 'Tapper - Testplan support with TaskJuggler interoperability'
 author:
+  - 'AMD OSRC Tapper Team, C<< <tapper at amd64.org> >>'
   - 'AMD OSRC Tapper Team <tapper@amd64.org>'
 build_requires:
   ExtUtils::MakeMaker: 6.42
-  Tapper::Schema: 0
+  Tapper::Schema: 3.000010
   Test::Differences: 0
   Test::MockModule: 0
   Test::More: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.42
 distribution_type: module
-generated_by: 'Module::Install version 0.91'
+generated_by: 'Module::Install version 1.00'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -33,9 +34,9 @@ requires:
   File::ShareDir: 0
   File::Slurp: 0
   Moose: 0
-  Tapper::Cmd: 3.000004
-  Tapper::Config: 3.000002
-  Tapper::Model: 3.000002
+  Tapper::Cmd: 3.000010
+  Tapper::Config: 3.000010
+  Tapper::Model: 3.000010
   Template: 0
   Text::CSV::Slurp: 0
   WWW::Mechanize: 0
@@ -43,4 +44,4 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Tapper-Testplan
   license: http://dev.perl.org/licenses/
   repository: git://github.com/amd/Tapper-Testplan.git
-version: 3.000006
+version: 3.000010
