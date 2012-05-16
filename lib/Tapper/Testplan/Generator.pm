@@ -1,4 +1,11 @@
 package Tapper::Testplan::Generator;
+BEGIN {
+  $Tapper::Testplan::Generator::AUTHORITY = 'cpan:AMD';
+}
+{
+  $Tapper::Testplan::Generator::VERSION = '4.0.1';
+}
+# ABSTRACT: Main module for generating testplan instances
 
 use warnings;
 use strict;
@@ -13,13 +20,73 @@ use Template;
 
 extends 'Tapper::Testplan';
 
+
+sub apply_macro
+{
+        my ($self, $macro, $substitutes) = @_;
+
+
+        my @include_paths = (Tapper::Config->subconfig->{paths}{testplan_path});
+        my $include_path_list = join ":", @include_paths;
+
+        my $tt = Template->new({
+                               INCLUDE_PATH =>  $include_path_list,
+                               });
+        my $ttapplied;
+
+        $tt->process(\$macro, $substitutes, \$ttapplied) || die $tt->error();
+        return $ttapplied;
+}
+
+
+
+
+sub run
+{
+        my ($self, $force)    = @_;
+        my $plugin    = Tapper::Config->subconfig->{testplans}{generator}{plugin}{name} || 'Taskjuggler';
+        my $now       = time();
+        my $intervall = Tapper::Config->subconfig->{testplans}{generator}{interval};
+
+        eval "use Tapper::Testplan::Plugins::$plugin";
+        my $reporter = "Tapper::Testplan::Plugins::$plugin"->new(cfg => Tapper::Config->subconfig->{testplans}{reporter}{plugin});
+
+        my @instances;
+ TASK:
+        foreach my $task ($reporter->get_tasks()) {
+
+                my $path  = $task->{path};
+                my $name  = $task->{name};
+
+                my $instances = model('TestrunDB')->resultset('TestplanInstance')->search
+                  ({ path => $path,
+                     created_at => { '>=' => $now - $intervall }});
+
+                next TASK if $instances->count and not $force;
+
+                my $file = Tapper::Config->subconfig->{paths}{testplan_path}.$path;
+                next TASK unless -e $file;
+
+                my $plan = slurp($file);
+                $plan = $self->apply_macro($plan);
+                my $cmd = Tapper::Cmd::Testplan->new();
+                push @instances, $cmd->add($plan, $path, $name);
+        }
+        return @instances;
+}
+
+1; # End of Tapper::Testplan::Generator
+
+__END__
+=pod
+
+=encoding utf-8
+
 =head1 NAME
 
-Tapper::Testplan::Generator - Main module for generating testplan instances!
-
+Tapper::Testplan::Generator - Main module for generating testplan instances
 
 =head1 SYNOPSIS
-
 
     use Tapper::Testplan::Generator;
 
@@ -38,28 +105,6 @@ Apply macros on test plan content.
 @return success - text with applied macros
 @return error   - die with error string
 
-
-=cut
-
-sub apply_macro
-{
-        my ($self, $macro, $substitutes) = @_;
-
-
-        my @include_paths = (Tapper::Config->subconfig->{paths}{testplan_path});
-        my $include_path_list = join ":", @include_paths;
-
-        my $tt = Template->new({
-                               INCLUDE_PATH =>  $include_path_list,
-                               });
-        my $ttapplied;
-        
-        $tt->process(\$macro, $substitutes, \$ttapplied) || die $tt->error();
-        return $ttapplied;
-}
-
-
-
 =head2 run
 
 Create test plan instances based on task list given by plugin and the
@@ -69,58 +114,17 @@ interval (configurable) or for all tasks if force option is given.
 
 @param bool - force creation of test plans for all tasks
 
-=cut
-
-sub run
-{
-        my ($self, $force)    = @_;
-        my $plugin    = Tapper::Config->subconfig->{testplans}{generator}{plugin}{name} || 'Taskjuggler';
-        my $now       = time();
-        my $intervall = Tapper::Config->subconfig->{testplans}{generator}{interval};
-
-        eval "use Tapper::Testplan::Plugins::$plugin";
-        my $reporter = "Tapper::Testplan::Plugins::$plugin"->new(cfg => Tapper::Config->subconfig->{testplans}{reporter}{plugin});
-
-        my @instances;
- TASK:
-        foreach my $task ($reporter->get_tasks()) {
-                
-                my $path  = $task->{path};
-                my $name  = $task->{name};
-
-                my $instances = model('TestrunDB')->resultset('TestplanInstance')->search
-                  ({ path => $path,
-                     created_at => { '>=' => $now - $intervall }});
-
-                next TASK if $instances->count and not $force;
-
-                my $file = Tapper::Config->subconfig->{paths}{testplan_path}.$path;
-                next TASK unless -e $file;
-                
-                my $plan = slurp($file);
-                $plan = $self->apply_macro($plan);
-                my $cmd = Tapper::Cmd::Testplan->new();
-                push @instances, $cmd->add($plan, $path, $name);
-        }
-        return @instances;
-}
-
 =head1 AUTHOR
 
-AMD OSRC Tapper Team, C<< <tapper at amd64.org> >>
+AMD OSRC Tapper Team <tapper@amd64.org>
 
-=head1 BUGS
+=head1 COPYRIGHT AND LICENSE
 
+This software is Copyright (c) 2012 by Advanced Micro Devices, Inc..
 
-=head1 ACKNOWLEDGEMENTS
+This is free software, licensed under:
 
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2008-2011 AMD OSRC Tapper Team, all rights reserved.
-
-This program is released under the following license: freebsd
+  The (two-clause) FreeBSD License
 
 =cut
 
-1; # End of Tapper::Testplan::Generator

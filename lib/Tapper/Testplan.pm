@@ -1,55 +1,39 @@
 package Tapper::Testplan;
+BEGIN {
+  $Tapper::Testplan::AUTHORITY = 'cpan:AMD';
+}
+{
+  $Tapper::Testplan::VERSION = '4.0.1';
+}
+# ABSTRACT: Tapper - Testplan support with TaskJuggler interoperability
 
 use Moose;
 
 use warnings;
 use strict;
 
+1; # End of Tapper::Testplan
+
+__END__
+=pod
+
+=encoding utf-8
+
 =head1 NAME
 
 Tapper::Testplan - Tapper - Testplan support with TaskJuggler interoperability
 
-=cut
-
-our $VERSION = '3.000010';
-
-
-=head1 SYNOPSIS
-
-
-    package Tapper::Testplan::Foo;
-
-    use Moose;
-    extends 'Tapper::Testplan';
-
-=head1 EXPORT
-
-
 =head1 AUTHOR
 
-AMD OSRC Tapper Team, C<< <tapper at amd64.org> >>
+AMD OSRC Tapper Team <tapper@amd64.org>
 
-=head1 BUGS
+=head1 COPYRIGHT AND LICENSE
 
+This software is Copyright (c) 2012 by Advanced Micro Devices, Inc..
 
-=head1 SUPPORT
+This is free software, licensed under:
 
-You can find documentation for this module with the perldoc command.
-
-    perldoc Tapper::Testplan
-
-
-
-=head1 ACKNOWLEDGEMENTS
-
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2008-2011 AMD OSRC Tapper Team, all rights reserved.
-
-This program is released under the following license: freebsd
-
+  The (two-clause) FreeBSD License
 
 =cut
 
-1; # End of Tapper::Testplan
