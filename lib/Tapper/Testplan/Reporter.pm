@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Reporter::AUTHORITY = 'cpan:AMD';
 }
 {
-  $Tapper::Testplan::Reporter::VERSION = '4.0.1';
+  $Tapper::Testplan::Reporter::VERSION = '4.0.2';
 }
 # ABSTRACT: Main module for testplan reporting
 

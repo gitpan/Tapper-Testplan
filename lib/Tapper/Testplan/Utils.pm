@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Utils::AUTHORITY = 'cpan:AMD';
 }
 {
-  $Tapper::Testplan::Utils::VERSION = '4.0.1';
+  $Tapper::Testplan::Utils::VERSION = '4.0.2';
 }
 # ABSTRACT: Utility functions for testplan modules and plugins
 

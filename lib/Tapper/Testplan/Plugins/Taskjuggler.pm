@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Plugins::Taskjuggler::AUTHORITY = 'cpan:AMD';
 }
 {
-  $Tapper::Testplan::Plugins::Taskjuggler::VERSION = '4.0.1';
+  $Tapper::Testplan::Plugins::Taskjuggler::VERSION = '4.0.2';
 }
 # ABSTRACT: Main module for testplan reporting
 

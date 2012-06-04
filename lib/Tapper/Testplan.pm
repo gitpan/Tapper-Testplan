@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::AUTHORITY = 'cpan:AMD';
 }
 {
-  $Tapper::Testplan::VERSION = '4.0.1';
+  $Tapper::Testplan::VERSION = '4.0.2';
 }
 # ABSTRACT: Tapper - Testplan support with TaskJuggler interoperability
 
