@@ -1,9 +1,11 @@
 package Tapper::Testplan;
+# git description: v4.0.2-5-gf211fc0
+
 BEGIN {
   $Tapper::Testplan::AUTHORITY = 'cpan:AMD';
 }
 {
-  $Tapper::Testplan::VERSION = '4.0.2';
+  $Tapper::Testplan::VERSION = '4.1.0';
 }
 # ABSTRACT: Tapper - Testplan support with TaskJuggler interoperability
 

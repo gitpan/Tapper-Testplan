@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Utils::AUTHORITY = 'cpan:AMD';
 }
 {
-  $Tapper::Testplan::Utils::VERSION = '4.0.2';
+  $Tapper::Testplan::Utils::VERSION = '4.1.0';
 }
 # ABSTRACT: Utility functions for testplan modules and plugins
 
@@ -24,7 +24,7 @@ sub get_testplan_success
         $instances = $instances->search({created_at => { '>=' => $now - $interval }}) if $interval;
 
         # always use the most current,
-        my $instance = $instances->first;
+        my $instance = $instances->search({}, {rows => 1})->first;
 
 
         my $task;

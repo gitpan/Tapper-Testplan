@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Generator::AUTHORITY = 'cpan:AMD';
 }
 {
-  $Tapper::Testplan::Generator::VERSION = '4.0.2';
+  $Tapper::Testplan::Generator::VERSION = '4.1.0';
 }
 # ABSTRACT: Main module for generating testplan instances
 

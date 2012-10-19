@@ -26,10 +26,7 @@ my %WriteMakefileArgs = (
     "ExtUtils::MakeMaker" => "6.30"
   },
   "DISTNAME" => "Tapper-Testplan",
-  "EXE_FILES" => [
-    "bin/tapper-testplan-generator",
-    "bin/tapper-testplan-reporter"
-  ],
+  "EXE_FILES" => [],
   "LICENSE" => "open_source",
   "NAME" => "Tapper::Testplan",
   "PREREQ_PM" => {
@@ -55,7 +52,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "4.0.2",
+  "VERSION" => "4.1.0",
   "test" => {
     "TESTS" => "t/*.t"
   }
