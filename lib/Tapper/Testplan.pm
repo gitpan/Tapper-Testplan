@@ -1,11 +1,11 @@
 package Tapper::Testplan;
-# git description: v4.0.2-5-gf211fc0
+# git description: v4.1.0-1-g7df1beb
 
 BEGIN {
-  $Tapper::Testplan::AUTHORITY = 'cpan:AMD';
+  $Tapper::Testplan::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::VERSION = '4.1.0';
+  $Tapper::Testplan::VERSION = '4.1.1';
 }
 # ABSTRACT: Tapper - Testplan support with TaskJuggler interoperability
 

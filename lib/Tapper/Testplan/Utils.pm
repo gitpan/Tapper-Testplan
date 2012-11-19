@@ -1,9 +1,9 @@
 package Tapper::Testplan::Utils;
 BEGIN {
-  $Tapper::Testplan::Utils::AUTHORITY = 'cpan:AMD';
+  $Tapper::Testplan::Utils::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::Utils::VERSION = '4.1.0';
+  $Tapper::Testplan::Utils::VERSION = '4.1.1';
 }
 # ABSTRACT: Utility functions for testplan modules and plugins
 

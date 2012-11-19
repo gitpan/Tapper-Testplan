@@ -1,9 +1,9 @@
 package Tapper::Testplan::Reporter;
 BEGIN {
-  $Tapper::Testplan::Reporter::AUTHORITY = 'cpan:AMD';
+  $Tapper::Testplan::Reporter::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::Reporter::VERSION = '4.1.0';
+  $Tapper::Testplan::Reporter::VERSION = '4.1.1';
 }
 # ABSTRACT: Main module for testplan reporting
 

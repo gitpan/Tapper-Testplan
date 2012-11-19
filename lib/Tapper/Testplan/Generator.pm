@@ -1,9 +1,9 @@
 package Tapper::Testplan::Generator;
 BEGIN {
-  $Tapper::Testplan::Generator::AUTHORITY = 'cpan:AMD';
+  $Tapper::Testplan::Generator::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::Generator::VERSION = '4.1.0';
+  $Tapper::Testplan::Generator::VERSION = '4.1.1';
 }
 # ABSTRACT: Main module for generating testplan instances
 

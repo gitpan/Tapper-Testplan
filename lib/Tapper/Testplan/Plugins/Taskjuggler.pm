@@ -1,9 +1,9 @@
 package Tapper::Testplan::Plugins::Taskjuggler;
 BEGIN {
-  $Tapper::Testplan::Plugins::Taskjuggler::AUTHORITY = 'cpan:AMD';
+  $Tapper::Testplan::Plugins::Taskjuggler::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::Plugins::Taskjuggler::VERSION = '4.1.0';
+  $Tapper::Testplan::Plugins::Taskjuggler::VERSION = '4.1.1';
 }
 # ABSTRACT: Main module for testplan reporting
 
