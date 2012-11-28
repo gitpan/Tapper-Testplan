@@ -1,11 +1,11 @@
 package Tapper::Testplan;
-# git description: v4.1.0-1-g7df1beb
+# git description: v4.1.1-2-gbe5b3f7
 
 BEGIN {
   $Tapper::Testplan::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::VERSION = '4.1.1';
+  $Tapper::Testplan::VERSION = '4.1.2';
 }
 # ABSTRACT: Tapper - Testplan support with TaskJuggler interoperability
 
@@ -17,6 +17,7 @@ use strict;
 1; # End of Tapper::Testplan
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -38,4 +39,3 @@ This is free software, licensed under:
   The (two-clause) FreeBSD License
 
 =cut
-

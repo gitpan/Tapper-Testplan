@@ -28,3 +28,5 @@ t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/tapper-testplan-generator.t
 t/tapper-testplan-reporter.t
+t/tapper_schema_reportsdb_test.sqlite
+t/tapper_schema_testrundb_test.sqlite

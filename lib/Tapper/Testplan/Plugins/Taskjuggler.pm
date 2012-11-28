@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Plugins::Taskjuggler::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::Plugins::Taskjuggler::VERSION = '4.1.1';
+  $Tapper::Testplan::Plugins::Taskjuggler::VERSION = '4.1.2';
 }
 # ABSTRACT: Main module for testplan reporting
 
@@ -357,8 +357,8 @@ sub send_reports
 
 1; # End of Tapper::Testplan::Reporter
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -467,4 +467,3 @@ This is free software, licensed under:
   The (two-clause) FreeBSD License
 
 =cut
-

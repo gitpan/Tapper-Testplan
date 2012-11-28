@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Reporter::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::Reporter::VERSION = '4.1.1';
+  $Tapper::Testplan::Reporter::VERSION = '4.1.2';
 }
 # ABSTRACT: Main module for testplan reporting
 
@@ -51,6 +51,7 @@ sub run
 1; # End of Tapper::Testplan::Reporter
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -86,4 +87,3 @@ This is free software, licensed under:
   The (two-clause) FreeBSD License
 
 =cut
-

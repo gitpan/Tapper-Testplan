@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Generator::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::Generator::VERSION = '4.1.1';
+  $Tapper::Testplan::Generator::VERSION = '4.1.2';
 }
 # ABSTRACT: Main module for generating testplan instances
 
@@ -78,6 +78,7 @@ sub run
 1; # End of Tapper::Testplan::Generator
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -127,4 +128,3 @@ This is free software, licensed under:
   The (two-clause) FreeBSD License
 
 =cut
-

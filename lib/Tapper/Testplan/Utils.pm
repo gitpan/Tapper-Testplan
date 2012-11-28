@@ -3,7 +3,7 @@ BEGIN {
   $Tapper::Testplan::Utils::AUTHORITY = 'cpan:TAPPER';
 }
 {
-  $Tapper::Testplan::Utils::VERSION = '4.1.1';
+  $Tapper::Testplan::Utils::VERSION = '4.1.2';
 }
 # ABSTRACT: Utility functions for testplan modules and plugins
 
@@ -56,8 +56,8 @@ sub get_testplan_success
 
 1; # End of Tapper::Testplan::Utils;
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -106,4 +106,3 @@ This is free software, licensed under:
   The (two-clause) FreeBSD License
 
 =cut
-

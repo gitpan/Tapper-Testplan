@@ -1,5 +1,8 @@
 Revision history for Tapper-Testplan
 
+4.1.2     2012-11-28
+        - skip Taskjuggler tests when no rsync available
+
 4.1.1     2012-11-20
         - dzil pluginbundle TAPPER
 

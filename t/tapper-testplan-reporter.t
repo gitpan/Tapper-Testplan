@@ -31,7 +31,6 @@ if ($ENV{HARNESS_IS_VERBOSE}) {
         diag '################################################################################ #';
 }
 
-
 $SIG{CHLD} = 'IGNORE';
 my $d = HTTP::Daemon->new || die "No HTTP daemon:$!";
 
@@ -59,56 +58,52 @@ my $mailtext;
 my $mock_tj = Test::MockModule->new('Tapper::Testplan::Plugins::Taskjuggler');
 $mock_tj->mock('send_mail', sub {(undef, $mailtext) = @_; return});
 
-
-
 # -----------------------------------------------------------------------------------------------------------------
 construct_fixture( schema  => testrundb_schema, fixture => 't/fixtures/testrundb/testrun_with_testplan.yml' );
 construct_fixture( schema  => reportsdb_schema, fixture => 't/fixtures/reportsdb/report.yml' );
 # -----------------------------------------------------------------------------------------------------------------
 
-
-BEGIN{
+BEGIN {
         use_ok('Tapper::Testplan::Reporter');
 }
-Hash::Merge::set_behavior( 'RIGHT_PRECEDENT' );
 
-Tapper::Config->subconfig->{testplans} = merge(
-                                                Tapper::Config->subconfig->{testplans},
-                                                { reporter   =>
-                                                  { plugin   => { name      => 'Taskjuggler',
-                                                                  url       => $d->url,
-                                                                  cacheroot =>  '/tmp/cacheroot_test/',
-                                                                  base_url  => "http://tapper",
-                                                                },
-                                                    interval => 1*24*60*60,
-                                                  }
-                                                });
-my $baseurl = Tapper::Config->subconfig->{base_url};
+SKIP: {
+        skip "taskjuggler plugin needs rsync", 3 if system("which rsync"); # system returns inverse bool semantic
 
+        Hash::Merge::set_behavior( 'RIGHT_PRECEDENT' );
+        Tapper::Config->subconfig->{testplans} = merge(
+                                                       Tapper::Config->subconfig->{testplans},
+                                                       { reporter   =>
+                                                         { plugin   => { name      => 'Taskjuggler',
+                                                                         url       => $d->url,
+                                                                         cacheroot =>  '/tmp/cacheroot_test/',
+                                                                         base_url  => "http://tapper",
+                                                                       },
+                                                           interval => 1*24*60*60,
+                                                         }
+                                                       });
+        my $baseurl = Tapper::Config->subconfig->{base_url};
 
+        my $reporter = Tapper::Testplan::Reporter->new();
+        isa_ok($reporter, 'Tapper::Testplan::Reporter');
+        eval {
+                $reporter->run();
+        };
+        ok(($@ ? 0 : 1), "reporter run");
 
-my $reporter = Tapper::Testplan::Reporter->new();
-isa_ok($reporter, 'Tapper::Testplan::Reporter');
-eval {
-        $reporter->run();
-};
-fail($@) if $@;
+        my $parser    = DateTime::Format::Natural->new(time_zone => 'local');
+        my $formatter = DateTime::Format::Strptime->new(pattern     => '%Y-%m-%d-00:00-%z', time_zone => 'local');
+        my $start     = $parser->parse_datetime("this monday");
+        my $end       = $parser->parse_datetime("next monday");
+        $start->set_formatter($formatter);
+        $end->set_formatter($formatter);
+        my $end_time  = DateTime::Format::DateParse->parse_datetime('3011-06-30-00:00')->set_formatter($formatter);
+        my $end_green = $parser->parse_datetime('next monday at 0:00')->set_formatter($formatter);
+        $end_green->subtract(hours => 1);
+        my $end_red   = $parser->parse_datetime('next monday at 0:00')->set_formatter($formatter);
+        $end_red->add(weeks => 1)->subtract(hours => 1);
 
-my $parser    = DateTime::Format::Natural->new(time_zone => 'local');
-my $formatter = DateTime::Format::Strptime->new(pattern     => '%Y-%m-%d-00:00-%z', time_zone => 'local');
-my $start     = $parser->parse_datetime("this monday");
-my $end       = $parser->parse_datetime("next monday");
-$start->set_formatter($formatter);
-$end->set_formatter($formatter);
-my $end_time  = DateTime::Format::DateParse->parse_datetime('3011-06-30-00:00')->set_formatter($formatter);
-my $end_green = $parser->parse_datetime('next monday at 0:00')->set_formatter($formatter);
-$end_green->subtract(hours => 1);
-my $end_red = $parser->parse_datetime('next monday at 0:00')->set_formatter($formatter);
-$end_red->add(weeks => 1)->subtract(hours => 1);
-
-
-my $expected = "timesheet tapper $start - $end {
-".
+        my $expected  = "timesheet tapper $start - $end {\n".
 qq(  task osrc.kernel.barracuda.server.kvm.svm_asid.tapper.SLES_11SP2 {
     work 0%
     end $end_time
@@ -227,9 +222,9 @@ Unable to find a test plan instance for this task.
 }
 );
 
-eq_or_diff($mailtext, $expected, 'Expected mail text');
+        eq_or_diff($mailtext, $expected, 'Expected mail text');
+};
 
 kill 15, $pid;
 
-
-done_testing();
+done_testing;
